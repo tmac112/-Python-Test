@@ -13,22 +13,16 @@ def search_baidu(query):
     resp = requests.get(url, headers=useragent)
     # 解析响应数据
     resp.encoding = "utf-8"
-    ind = resp.text.find("济南_百度搜索")
-
     soup = BeautifulSoup(resp.text, 'html.parser')
-
     results = soup.findAll("h3", {"class": {"c-title t t tts-title"}})
-
     if results:
         for tag in results:
             print("标题:", tag.find("a").get_text())
             print("超链接:", tag.find("a").attrs['href'])
         print('')
     else:
-
         print("No results found.")
-
-
+        
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         query = ' '.join(sys.argv[1:])
